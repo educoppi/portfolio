@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link id="favicon" rel="icon" href="img/icon-portfolio-red.png">
+    <title>Eduardo Coppi</title>
+</head>
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        <h1><span>E</span>duardo</h1>
+        <div class="buttonsChangeColor">
+            <div onclick="changeColors('#e83151')" class="mudarTema corVermelho"></div>
+            <div onclick="changeColors('#b191ff')" class="mudarTema corRoxo"></div>
+            <div onclick="changeColors('#147de5')" class="mudarTema corAzul"></div>
+            <p id="infoChangeColor">👈 Mude a cor tema do site</p>
+        </div>
+
+    </div>
+
+    <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+    </div>
+
+    <nav class="nav-list">
+        <a onclick="scrollPage('')"> <li>Inicio</li> </a>
+        <a onclick="scrollPage('aboutme')"> <li>Sobre mim</li> </a>
+        <a onclick="scrollPage('projects')"> <li>Projetos</li> </a>
+        <a onclick="scrollPage('contact')"> <li>Contato</li> </a>
+    </nav>
+
+</header>
+
+    <!-- Inicio -->
+
+<main>
+    <div class="bg_img overlay"></div>
+    <div class="inicio">
+        <h2>Eduardo Coppi</h2>
+        <div class="line beginning"></div>
+        <h3>Desenvolvedor de Software</h3>
+        <div class="rede_social">
+            <a href="https://github.com/educoppi" target="_blank"><img src="img/github-icon.png" alt="Github Logo"></a>
+        </div>
+    </div>
+</main>
+
+    <!-- Sobre mim -->
+<section class="section-aboutme">
+    <div id="aboutme" class="aboutme">
+        <div class="aboutmetitle">
+            <h1>Sobre mim</h1>
+            <div class="line aboutMe"></div>
+        </div>
+        <div id="aboutmeTextScrollTo" class="aboutmetext">
+            <p>Desenvolvedor de Software formado pelo <span>SENAI</span>, com foco em criar soluções tecnológicas para pequenas e grandes empresas. <span>Determinado</span>, <span>proativo</span> e <span>colaborativo</span>, são os adjetivos que me tornam um profissional capaz de transformar ideias em soluções eficientes.</p>
+            <br>
+            <p>Sou um desenvolvedor <span>fullstack</span>, utilizando <span>HTML</span>, <span>CSS</span> e <span>JavaScript</span> para a interface do usuário, e <span>Java</span> com <span>Spring Boot</span> para o desenvolvimento do servidor, além de <span>SQL</span> para a criação e gerenciamento de bancos de dados. Com esses conhecimentos, sou capaz de criar aplicações do zero.</p>
+        </div>
+        <button onclick=downloadCV()>Baixar Currículo</button>
+    </div>
+
+    <div id="programlanguages" class="programlanguages">
+
+        <div class="language">
+            <img class="language_img" src="img/html-icon.png" alt="">
+            <div class="description">
+                <h5>HTML</h5>
+                <p>Linguagem para criar e estruturar conteúdo na web</p>
+            </div>
+        </div>
+
+
+        <div class="language">
+            <img class="language_img" src="img/css-icon.png" alt="">
+            <div class="description">
+                <h5>CSS</h5>
+                <p>Linguagem de estilização para documentos HTML</p>
+            </div>
+        </div>
+
+        <div class="language">
+            <img class="language_img" src="img/js.png" width="auto" height="auto" style="max-width: 95px; max-height: 95px; margin-top: 57px;"  alt="">
+            <div class="description">
+                <h5>JavaScript</h5>
+                <p>Linguagem de interação para páginas web</p>
+            </div>
+        </div>
+
+        <div class="language">
+            <img class="language_img" src="img/java.png" alt="">
+            <div class="description">
+                <h5>Java</h5>
+                <p>Linguagem para criação de aplicações</p>
+            </div>
+        </div>
+
+        <div class="language">
+            <img class="language_img" src="img/springboot-icon.png" style="margin-top: 57px;"  alt="">
+            <div class="description">
+                <h5>SpringBoot</h5>
+                <p>Framework para a criação de aplicações</p>
+            </div>
+        </div>
+
+        <div class="language">
+            <img class="language_img" src="img/sql-icon.png"  width="auto" height="auto" style="max-width: 95px; max-height: 95px; margin-top: 65px;" alt="">
+            <div class="description">
+                <h5>SQL</h5>
+                <p>Linguagem para gerenciar banco de dados</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <!-- projetos -->
+
+<section class="section-centralizada">
+
+    <div id="projeto_title" class="projeto_title">
+        <h1>Projetos</h1>
+        <div class="line projects"></div>
+    </div>
+
+    <div id="projetos" class="projetos">
+        <div class="projeto">
+            <div class="image-projeto proj-one"></div>
+            <div class="content">
+                <h1>Projeto 1</h1>
+                <p>Em breve</p>
+            </div>
+        </div>
+
+        <div class="projeto">
+            <div class="image-projeto proj-two"></div>
+            <div class="content">
+                <h1>Projeto 2</h1>
+                <p>Em breve</p>
+            </div>
+        </div>
+
+        <div class="projeto">
+            <div class="image-projeto proj-three"></div>
+            <div class="content">
+                <h1>Projeto 3</h1>
+                <p>Em breve</p>
+            </div>
+        </div>
+
+        <div class="projeto">
+            <div class="image-projeto proj-four"></div>
+            <div class="content">
+                <h1>Projeto 4</h1>
+                <p>Em breve</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- contato -->
+
+    <section class="section-centralizada">
+        <div id="contato_title" class="contato_title">
+            <h1>Contato</h1>
+            <div class="line contact"></div>
+        </div>
+
+        <div id="contato-content" class="contato-content">
+            <div class="email-content">
+                <p>clique para copiar o email:</p>
+                <h3 id="emailId">educoppi8@gmail.com</h3>
+                <div class="line email"></div>
+            </div>
+            <div class="redes_sociais-content">
+                <a href="https://github.com/educoppi" target="_blank"><img src="img/github-icon.png" alt="Github Logo"></a>
+                <a href="https://www.linkedin.com/in/eduardocoppi2004/" target="_blank"><img src="img/linkedin-icon.png" alt="Linkedin Logo"></a>
+            </div>
+        </div>
+        <div id="notificacao" class="notificacao"></div>
+    </section>
+</section>
+
+<footer id="footer"> 
+    <h5>© Eduardo Coppi 2024</h5>
+    <a href="https://icons8.com.br/">icons by icons8</a>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
+
+
