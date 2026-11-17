@@ -1,32 +1,22 @@
-import { CV_URL, SKILLS } from '../data/content.js'
+import { SKILLS } from '../data/content.js'
 import { useReveal } from '../hooks.js'
+import { pick, useI18n } from '../i18n.jsx'
 import SectionTitle from './SectionTitle.jsx'
 
 const A = ({ children }) => <strong className="accent">{children}</strong>
 
 export default function About() {
+  const { t, lang } = useI18n()
   const [textRef, textVisible] = useReveal()
   const [skillsRef, skillsVisible] = useReveal()
 
   return (
     <section id="sobre" className="section about">
       <div className="about-text">
-        <SectionTitle>Sobre mim</SectionTitle>
+        <SectionTitle>{t.aboutTitle}</SectionTitle>
         <div ref={textRef} className={`reveal reveal-left ${textVisible ? 'is-visible' : ''}`}>
-          <p>
-            Desenvolvedor de Software formado pelo <A>SENAI</A>, com foco em criar soluções tecnológicas para
-            pequenas e grandes empresas. <A>Determinado</A>, <A>proativo</A> e <A>colaborativo</A>, são os
-            adjetivos que me tornam um profissional capaz de transformar ideias em soluções eficientes.
-          </p>
-          <p>
-            Sou um desenvolvedor <A>fullstack</A>, utilizando <A>HTML</A>, <A>CSS</A> e <A>JavaScript</A> para a
-            interface do usuário, e <A>Java</A> com <A>Spring Boot</A> para o desenvolvimento do servidor, além de{' '}
-            <A>SQL</A> para a criação e gerenciamento de bancos de dados. Com esses conhecimentos, sou capaz de
-            criar aplicações do zero.
-          </p>
-          <a className="btn-gradient" href={CV_URL} download="CV_EduardoCoppi.pdf">
-            Baixar Currículo
-          </a>
+          <p>{t.about1(A)}</p>
+          <p>{t.about2(A)}</p>
         </div>
       </div>
 
@@ -37,7 +27,7 @@ export default function About() {
               <img src={skill.icon} alt="" loading="lazy" />
             </div>
             <h3>{skill.name}</h3>
-            <p className="skill-tooltip">{skill.description}</p>
+            <p className="skill-tooltip">{pick(skill.description, lang)}</p>
           </li>
         ))}
       </ul>

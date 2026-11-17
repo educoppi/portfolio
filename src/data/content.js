@@ -1,33 +1,71 @@
 const img = (file) => `${import.meta.env.BASE_URL}img/${file}`
 
+// Textos que mudam com o idioma usam { en, pt }; os rótulos da interface ficam em src/i18n.jsx.
+
 export const THEMES = [
-  { id: 'red', label: 'Vermelho', color: '#e83151', favicon: img('icon-portfolio-red.png') },
-  { id: 'purple', label: 'Roxo', color: '#b191ff', favicon: img('icon-portfolio-purple.png') },
-  { id: 'blue', label: 'Azul', color: '#147de5', favicon: img('icon-portfolio-blue.png') },
+  { id: 'red', color: '#e83151', favicon: img('icon-portfolio-red.png') },
+  { id: 'purple', color: '#b191ff', favicon: img('icon-portfolio-purple.png') },
+  { id: 'blue', color: '#147de5', favicon: img('icon-portfolio-blue.png') },
 ]
 
-export const NAV_LINKS = [
-  { id: 'inicio', label: 'Início' },
-  { id: 'sobre', label: 'Sobre mim' },
-  { id: 'projetos', label: 'Projetos' },
-  { id: 'contato', label: 'Contato' },
-]
+export const NAV_LINKS = ['inicio', 'sobre', 'projetos', 'contato']
 
 export const SKILLS = [
-  { name: 'HTML', description: 'Linguagem para criar e estruturar conteúdo na web', icon: img('html-icon.png') },
-  { name: 'CSS', description: 'Linguagem de estilização para documentos HTML', icon: img('css-icon.png') },
-  { name: 'JavaScript', description: 'Linguagem de interação para páginas web', icon: img('js.png') },
-  { name: 'Java', description: 'Linguagem para criação de aplicações', icon: img('java.png') },
-  { name: 'Spring Boot', description: 'Framework para a criação de aplicações', icon: img('springboot-icon.png') },
-  { name: 'SQL', description: 'Linguagem para gerenciar banco de dados', icon: img('sql-icon.png') },
+  {
+    name: 'Java',
+    description: { en: 'Language for building applications', pt: 'Linguagem para criação de aplicações' },
+    icon: img('java.png'),
+  },
+  {
+    name: 'Spring Boot',
+    description: { en: 'Framework for building APIs and services', pt: 'Framework para criação de APIs e serviços' },
+    icon: img('springboot-icon.png'),
+  },
+  {
+    name: 'SQL',
+    description: { en: 'Language for managing databases', pt: 'Linguagem para gerenciar banco de dados' },
+    icon: img('sql-icon.png'),
+  },
+  {
+    name: 'TypeScript',
+    description: { en: 'JavaScript with static typing', pt: 'JavaScript com tipagem estática' },
+    icon: img('typescript-icon.svg'),
+  },
+  {
+    name: 'React',
+    description: { en: 'Library for building user interfaces', pt: 'Biblioteca para construir interfaces' },
+    icon: img('react-icon.svg'),
+  },
+  {
+    name: 'JavaScript',
+    description: { en: 'Language for interactive web pages', pt: 'Linguagem de interação para páginas web' },
+    icon: img('js.png'),
+  },
+  {
+    name: 'HTML',
+    description: { en: 'Language for structuring web content', pt: 'Linguagem para criar e estruturar conteúdo na web' },
+    icon: img('html-icon.png'),
+  },
+  {
+    name: 'CSS',
+    description: { en: 'Language for styling HTML documents', pt: 'Linguagem de estilização para documentos HTML' },
+    icon: img('css-icon.png'),
+  },
 ]
 
-// Para adicionar um projeto real, preencha title/description/image/tags e, se houver, repo e/ou demo (URL).
+// Para adicionar um projeto, inclua um objeto com title/description/image/tags e, se houver, repo e demo (URLs).
 export const PROJECTS = [
-  { title: 'Projeto 1', description: 'Em breve', image: img('image-projeto1.jpg'), tags: [] },
-  { title: 'Projeto 2', description: 'Em breve', image: img('image-projeto1.jpg'), tags: [] },
-  { title: 'Projeto 3', description: 'Em breve', image: img('image-projeto1.jpg'), tags: [] },
-  { title: 'Projeto 4', description: 'Em breve', image: img('image-projeto1.jpg'), tags: [] },
+  {
+    title: 'Fluxo — Finance Dashboard',
+    description: {
+      en: 'Personal finance dashboard: log income and expenses, set a monthly savings goal and track your spending pace with category charts, a filterable history and multi-currency support.',
+      pt: 'Dashboard de finanças pessoais: registre receitas e despesas, defina uma meta mensal de economia e acompanhe o ritmo de gastos com gráficos por categoria, histórico filtrável e suporte a várias moedas.',
+    },
+    image: img('finance-dashboard.png'),
+    tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Recharts'],
+    repo: 'https://github.com/educoppi/finance-dashboard',
+    demo: 'https://educoppi.github.io/finance-dashboard/',
+  },
 ]
 
 export const CONTACT = {
@@ -37,5 +75,3 @@ export const CONTACT = {
     { name: 'LinkedIn', href: 'https://www.linkedin.com/in/eduardocoppi2004/', icon: img('linkedin-icon.png') },
   ],
 }
-
-export const CV_URL = `${import.meta.env.BASE_URL}download/CV_EduardoCoppi.pdf`

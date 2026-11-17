@@ -50,6 +50,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* elementos que entram pela lateral (.reveal) não podem alargar a página no celular */
+main {
+  overflow-x: clip;
+}
+
 ul {
   list-style: none;
 }
@@ -124,11 +129,24 @@ button {
     background-color 0.5s,
     height 0.4s var(--ease);
 }
-.header.is-scrolled {
-  --header-h: 76px;
+/* O desfoque fica num pseudo-elemento: backdrop-filter no próprio header
+   viraria o "containing block" do menu mobile (position: fixed) e ele vazaria a largura. */
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background-color: rgb(20 20 20 / 0.85);
   backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.header.is-scrolled {
+  --header-h: 76px;
   animation: header-glow 3.5s ease-in-out infinite;
+}
+.header.is-scrolled::before {
+  opacity: 1;
 }
 @keyframes header-glow {
   0%,
@@ -234,6 +252,43 @@ button {
 .nav a:hover::after,
 .nav a.is-active::after {
   width: 100%;
+}
+
+.nav {
+  margin-left: auto;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.lang-switch {
+  position: relative;
+  display: flex;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  background: rgb(0 0 0 / 0.25);
+}
+.lang-switch button {
+  min-width: 38px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  transition:
+    color 0.3s,
+    background-color 0.3s;
+}
+.lang-switch button:hover {
+  color: #fff;
+}
+.lang-switch button.is-active {
+  background: var(--accent);
+  color: #fff;
 }
 
 .menu-toggle {
@@ -463,8 +518,8 @@ button {
 
 .skills {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px 12px;
 }
 .skill {
   position: relative;
@@ -478,8 +533,8 @@ button {
   outline: none;
 }
 .skill-icon {
-  width: 100px;
-  height: 100px;
+  width: 84px;
+  height: 84px;
   display: grid;
   place-items: center;
 }
@@ -549,78 +604,92 @@ button {
   width: 100%;
   max-width: 1120px;
   margin-top: 48px;
-  padding: 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 32px;
+  gap: 40px;
+}
+.project {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 28px;
   border-radius: 25px;
   background: var(--bg-elev);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 60%, transparent),
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 60%, transparent),
     0 10px 40px -20px var(--accent);
   transition: box-shadow 0.4s;
 }
-.project {
-  position: relative;
-  aspect-ratio: 4 / 3;
+.project-media {
+  display: block;
   overflow: hidden;
-  border-radius: 12px;
-  cursor: pointer;
-  transition:
-    box-shadow 0.5s ease-in-out,
-    transform 0.4s var(--ease);
+  border-radius: 14px;
+  aspect-ratio: 16 / 10;
+  transition: box-shadow 0.5s ease-in-out;
 }
 .project-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
   transition: transform 1s var(--ease);
 }
-.project-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 16px;
-  text-align: center;
-  background: rgb(0 0 0 / 0.6);
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-.project-overlay h3 {
-  font-family: var(--font-display);
-  font-weight: normal;
-  font-size: 28px;
-}
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 6px;
-}
-.project-tags li {
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-size: 13px;
-  border: 1px solid var(--accent);
-}
-.project:hover,
-.project:focus-visible {
-  transform: translateY(-4px);
+.project-media:hover {
   box-shadow:
     40px 0 50px rgb(20 124 229 / 0.42),
     -40px 0 50px rgb(249 9 73 / 0.43);
 }
-.project:hover .project-img,
-.project:focus-visible .project-img {
-  transform: scale(1.2);
+.project-media:hover .project-img {
+  transform: scale(1.06);
 }
-.project:hover .project-overlay,
-.project:focus-visible .project-overlay {
-  opacity: 1;
+.project-body h3 {
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.15;
+}
+.project-body p {
+  margin-top: 14px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.project-tags li {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  color: var(--text-muted);
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+  margin-top: 26px;
+}
+.project-links .btn-gradient {
+  margin-top: 0;
+}
+.btn-ghost {
+  padding: 13px 4px;
+  font-size: 15px;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.3s,
+    border-color 0.3s;
+}
+.btn-ghost:hover {
+  color: #fff;
+  border-color: var(--accent);
 }
 .projects.is-visible .project {
   animation: pop-in 0.8s var(--ease) both;
@@ -629,7 +698,7 @@ button {
 @keyframes pop-in {
   from {
     opacity: 0;
-    transform: translateY(24px) scale(0.95);
+    transform: translateY(24px) scale(0.97);
   }
 }
 
@@ -764,9 +833,13 @@ button {
     grid-template-columns: 1fr;
     gap: 48px;
   }
+  .project {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
   .skills {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 640px;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 720px;
     width: 100%;
     margin: 0 auto;
   }
@@ -836,18 +909,30 @@ button {
     animation: none;
     box-shadow: 0 4px 30px -8px var(--accent);
   }
+  .header-inner {
+    padding: 0 16px;
+    gap: 12px;
+  }
   .brand {
-    gap: 14px;
+    gap: 12px;
   }
   .logo {
-    font-size: 34px;
+    font-size: 30px;
   }
   .theme-picker {
-    gap: 10px;
+    gap: 8px;
   }
   .theme-dot {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
+  }
+  .header-actions {
+    gap: 10px;
+  }
+  .lang-switch button {
+    min-width: 32px;
+    padding: 4px 7px;
+    font-size: 13px;
   }
   .theme-hint {
     display: none;
@@ -898,22 +983,43 @@ button {
   .skill-tooltip::before {
     display: none;
   }
-  .projects {
-    padding: 20px;
+  .project {
+    padding: 16px;
     gap: 20px;
-    margin-top: 32px;
-  }
-  /* Em touch o overlay fica parcialmente visível */
-  .project-overlay {
-    opacity: 1;
-    justify-content: flex-end;
-    background: linear-gradient(transparent 30%, rgb(0 0 0 / 0.8));
   }
   .contact-socials img {
     width: 72px;
   }
   .toast {
     font-size: 17px;
+  }
+}
+
+@media (max-width: 380px) {
+  .header-inner {
+    padding: 0 12px;
+    gap: 8px;
+  }
+  .brand {
+    gap: 10px;
+  }
+  .logo {
+    font-size: 26px;
+  }
+  .theme-picker {
+    gap: 6px;
+  }
+  .theme-dot {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  .header-actions {
+    gap: 6px;
+  }
+  .lang-switch button {
+    min-width: 30px;
+    padding: 4px 6px;
   }
 }
 

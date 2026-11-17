@@ -1,7 +1,9 @@
 import { CONTACT } from '../data/content.js'
 import { scrollToSection } from '../hooks.js'
+import { useI18n } from '../i18n.jsx'
 
 export default function Hero() {
+  const { t } = useI18n()
   const github = CONTACT.socials.find((s) => s.name === 'GitHub')
   return (
     <section id="inicio" className="hero">
@@ -9,7 +11,7 @@ export default function Hero() {
       <div className="hero-content">
         <h1>Eduardo Coppi</h1>
         <span className="accent-line full" />
-        <p className="hero-role">Desenvolvedor de Software</p>
+        <p className="hero-role">{t.role}</p>
         <a className="hero-social" href={github.href} target="_blank" rel="noreferrer" aria-label="GitHub">
           <img src={github.icon} alt="" />
         </a>
@@ -17,7 +19,7 @@ export default function Hero() {
       <a
         href="#sobre"
         className="scroll-cue"
-        aria-label="Rolar para Sobre mim"
+        aria-label={t.scrollCue}
         onClick={(e) => {
           e.preventDefault()
           scrollToSection('sobre')
