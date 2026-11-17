@@ -618,29 +618,37 @@ button {
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--accent) 60%, transparent),
     0 10px 40px -20px var(--accent);
-  transition: box-shadow 0.4s;
+  /* `translate` (e não `transform`) para não brigar com a animação de entrada pop-in */
+  transition:
+    translate 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
 }
 .project-media {
   display: block;
   overflow: hidden;
   border-radius: 14px;
   aspect-ratio: 16 / 10;
-  transition: box-shadow 0.5s ease-in-out;
+  outline: 1px solid rgb(255 255 255 / 0.08);
+  outline-offset: -1px;
 }
 .project-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top;
-  transition: transform 1s var(--ease);
+  transition: transform 0.6s var(--ease);
 }
-.project-media:hover {
+/* Hover: o card sobe levemente, a borda ganha a cor tema e a imagem dá um zoom sutil */
+.project:hover,
+.project:focus-within {
+  translate: 0 -4px;
   box-shadow:
-    40px 0 50px rgb(20 124 229 / 0.42),
-    -40px 0 50px rgb(249 9 73 / 0.43);
+    0 0 0 1px var(--accent),
+    0 18px 40px -18px color-mix(in srgb, var(--accent) 70%, transparent);
 }
-.project-media:hover .project-img {
-  transform: scale(1.06);
+.project:hover .project-img,
+.project:focus-within .project-img {
+  transform: scale(1.03);
 }
 .project-body h3 {
   font-family: var(--font-display);
@@ -1024,6 +1032,10 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .project:hover,
+  .project:focus-within {
+    translate: none;
+  }
   *,
   *::before,
   *::after {
